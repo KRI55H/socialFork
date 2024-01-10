@@ -1,5 +1,5 @@
 <?php
-namespace kri55h\socialFork;
+namespace kri55h\socialfork;
 
 use Exception;
 
