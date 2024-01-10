@@ -1,0 +1,26 @@
+{
+  "name": "kri55h/socialFork",
+  "title" : "socialFork",
+  "description": "SocialFork PHP: Download videos from TikTok, YouTube, Facebook, Snapchat, and Instagram effortlessly. Integrate seamlessly into your PHP projects to access and manage engaging content across multiple social platforms.",
+  "type": "library",
+  "keywords": ["tiktok","TikTok","snapchat","SnapChat","Youtube","youtube","Facebook","facebook","Instagram","instagram","Twitter","twitter","video","saver","php7.4","php","php8","video-saver","post-saver"],
+  "homepage": "https://github.com/KRI55H/socialFork",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Krish Siddhapura",
+      "email": "siddhapurakrish007@gmail.com",
+      "role": "Founder"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-fileinfo": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "kri55h\\socialFork\\": "src"
+    }
+  }
+}
