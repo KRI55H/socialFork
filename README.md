@@ -15,24 +15,3 @@ You have to download [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation) in 
 composer require kri55h/socialfork
 ```
 
-## Usage
-Here's an example demonstrating how to use the `RedditSaver` class from this package:
-```php
-use kri55h\redditsaver\RedditSaver;
-
-try {
-    $reddit = new RedditSaver();
-    $reddit->setPostURL('<reddit_post_url>');
-    $videoSaved = $reddit->saveVIDEO();
-
-    if ($videoSaved) {
-        // Video saved successfully
-        return 'Video saved!';
-    } else {
-        // Handle if video saving failed
-        return 'Failed to save video.';
-    }
-} catch (Exception $e) {
-    // Handle any exceptions or errors that occurred during the process
-    return 'An error occurred: ' . $e->getMessage();
-}
