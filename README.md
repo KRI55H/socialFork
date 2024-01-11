@@ -28,16 +28,16 @@ Follow the steps below to install the required dependencies:
 #### macOS:
 - Install Homebrew if you haven't already by following the instructions on [Homebrew's website](https://brew.sh/).
 - Open a terminal and run the following command:
-  ```bash
-  brew install ffmpeg
-  ```
+```bash
+brew install ffmpeg
+```
 
 #### Linux (Debian/Ubuntu):
 - Open a terminal and run the following command:
-  ```bash
-  sudo apt-get update
-  sudo apt-get install ffmpeg
-  ```
+```bash
+sudo apt-get update
+sudo apt-get install ffmpeg
+```
 
 ### Installing yt-dlp
 
