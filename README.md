@@ -6,12 +6,14 @@
 ![License](https://img.shields.io/github/license/KRI55H/socialFork)
 
 
-## Prerequisites
+## Overview
 
-Before using Social Fork, make sure you have the following dependencies installed on your system:
+SocialFork is a PHP library designed to simplify the process of downloading videos from various social media platforms.
 
-- [ffmpeg](https://ffmpeg.org/download.html)
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+## Features
+
+- Supports downloading videos from popular social media platforms, including TikTok, SnapChat, Youtube, Facebook, Instagram, and Twitter.
+- Requires [ffmpeg](https://ffmpeg.org/download.html) and [yt-dlp](https://github.com/yt-dlp/yt-dlp) as dependencies.
 
 ## Installation
 
@@ -19,33 +21,33 @@ Follow the steps below to install the required dependencies:
 
 ### Installing ffmpeg
 
-1. **Windows:**
-    - Visit the [official ffmpeg download page](https://ffmpeg.org/download.html).
-    - Follow the instructions to download and install the executable.
+#### Windows:
+- Visit the [official ffmpeg download page](https://ffmpeg.org/download.html).
+- Follow the instructions to download and install the executable.
 
-2. **macOS:**
-    - Install Homebrew if you haven't already by following the instructions on [Homebrew's website](https://brew.sh/).
-    - Open a terminal and run the following command:
-      ```bash
-      brew install ffmpeg
-      ```
+#### macOS:
+- Install Homebrew if you haven't already by following the instructions on [Homebrew's website](https://brew.sh/).
+- Open a terminal and run the following command:
+  ```bash
+  brew install ffmpeg
+  ```
 
-3. **Linux (Debian/Ubuntu):**
-    - Open a terminal and run the following command:
-      ```bash
-      sudo apt-get update
-      sudo apt-get install ffmpeg
-      ```
+#### Linux (Debian/Ubuntu):
+- Open a terminal and run the following command:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install ffmpeg
+  ```
 
 ### Installing yt-dlp
 
 1. **Windows, macOS, Linux:**
-    - Open a terminal and run the following command:
-      ```bash
-      pip install -U yt-dlp
-      ```
+- Open a terminal and run the following command:
+```bash
+pip install -U yt-dlp
+```
 
-   If you don't have `pip` installed, you can get it by following the instructions [here](https://pip.pypa.io/en/stable/installation/).
+If you don't have `pip` installed, you can get it by following the instructions [here](https://pip.pypa.io/en/stable/installation/).
 
 
 
@@ -93,4 +95,3 @@ try {
     return 'An error occurred: ' . $e->getMessage();
 }
 ```
-

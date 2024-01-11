@@ -25,25 +25,25 @@ class socialFork
         return $basePath . DIRECTORY_SEPARATOR . $append;
     }
 
-    function setUrl(string $url) : socialFork
+    public function setUrl(string $url) : socialFork
     {
         $this->videoURL = $url;
         return $this;
     }
 
-    function setName(string $name): socialFork
+    public function setName(string $name): socialFork
     {
         $this->fileName = $name;
         return $this;
     }
 
-    function setDownloadPath(string $path): socialFork
+    public function setDownloadPath(string $path): socialFork
     {
         $this->filePath = $path;
         return $this;
     }
 
-    function download(): bool
+    public function download(): bool
     {
         if(!isset($this->videoURL) || empty($this->videoURL)){
             throw new Exception("Please enter post url");
@@ -52,6 +52,11 @@ class socialFork
         $command = shell_exec("yt-dlp --version");
         if($command === null){
             throw new Exception("yt-dlp not found, please install yt-dlp");
+        }
+
+        $command = shell_exec("ffmpeg --version");
+        if($command === null){
+            throw new Exception("ffmpeg not found, please install ffmpeg");
         }
 
         $fileName       = $this->fileName;
@@ -66,7 +71,7 @@ class socialFork
         }
     }
 
-    function getInfo(): array
+    public function getInfo(): array
     {
         if(!isset($this->videoURL) || empty($this->videoURL)){
             throw new Exception("Please enter post url");
@@ -75,6 +80,11 @@ class socialFork
         $command = shell_exec("yt-dlp --version");
         if($command === null){
             throw new Exception("yt-dlp not found, please install yt-dlp");
+        }
+
+        $command = shell_exec("ffmpeg --version");
+        if($command === null){
+            throw new Exception("ffmpeg not found, please install ffmpeg");
         }
 
         $fileName = $this->fileName;
