@@ -1,32 +1,43 @@
 <?php
-namespace kri55h\socialfork;
+
+namespace Kri55h;
 
 use Exception;
 
 class socialFork
 {
-    public $videoURL,$fileName,$filePath;
+    private $videoURL,$fileName,$filePath;
+
 
     function __construct()
     {
-
-        $this->filePath = __DIR__;
+        $this->filePath = $this->basePath();
         $this->fileName = "socialFork_".date('dmYHis');
     }
 
-    function setUrl(string $url): static
+    private function basePath($append = '') : string
+    {
+        $basePath = __DIR__;
+
+        while ($basePath !== dirname($basePath)) {
+            $basePath = dirname($basePath);
+        }
+        return $basePath . DIRECTORY_SEPARATOR . $append;
+    }
+
+    function setUrl(string $url) : socialFork
     {
         $this->videoURL = $url;
         return $this;
     }
 
-    function setName(string $name): static
+    function setName(string $name): socialFork
     {
         $this->fileName = $name;
         return $this;
     }
 
-    function setDownloadPath(string $path): static
+    function setDownloadPath(string $path): socialFork
     {
         $this->filePath = $path;
         return $this;
