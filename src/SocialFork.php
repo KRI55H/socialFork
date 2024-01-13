@@ -8,14 +8,15 @@ class socialFork
 {
     private $videoURL,$fileName,$filePath;
 
+    private bool $isMerged = false;
 
     function __construct()
     {
-        $this->filePath = $this->basePath();
+        $this->filePath = $this->base_path();
         $this->fileName = "socialFork_".date('dmYHis');
     }
 
-    private function basePath($append = '') : string
+    private function base_path($append = '') : string
     {
         $basePath = __DIR__;
 
@@ -43,6 +44,12 @@ class socialFork
         return $this;
     }
 
+    function combineAudioAndVideo(bool $action = true) : socialFork
+    {
+        $this->isMerged = $action;
+        return $this;
+    }
+
     public function download(): bool
     {
         if(!isset($this->videoURL) || empty($this->videoURL)){
@@ -54,7 +61,7 @@ class socialFork
             throw new Exception("yt-dlp not found, please install yt-dlp");
         }
 
-        $command = shell_exec("ffmpeg --version");
+        $command = shell_exec("ffmpeg -version");
         if($command === null){
             throw new Exception("ffmpeg not found, please install ffmpeg");
         }
@@ -62,10 +69,16 @@ class socialFork
         $fileName       = $this->fileName;
         $filePath       = $this->filePath;
         $videoUrl       = $this->videoURL;
-        $download = shell_exec("yt-dlp -o '$filePath/$fileName.%(ext)s' --format best $videoUrl 2>&1");
+        if($this->isMerged){
+            $download = shell_exec("yt-dlp --playlist-start 1 --playlist-end 1 -f bestvideo+bestaudio --merge-output-format mp4  -o '$filePath/$fileName.%(ext)s' $videoUrl 2>&1");
+        }else{
+            $download = shell_exec("yt-dlp --playlist-start 1 --playlist-end 1 -o '$filePath/$fileName.%(ext)s' --format best $videoUrl 2>&1");
+        }
 
         if($download === null){
-            throw new Exception("Error while downloading video !");
+            $lastError = error_get_last();
+            $errorMessage = isset($lastError['message']) ? $lastError['message'] : "";
+            throw new Exception("Error while downloading video: $errorMessage");
         }else{
             return true;
         }
@@ -82,7 +95,7 @@ class socialFork
             throw new Exception("yt-dlp not found, please install yt-dlp");
         }
 
-        $command = shell_exec("ffmpeg --version");
+        $command = shell_exec("ffmpeg -version");
         if($command === null){
             throw new Exception("ffmpeg not found, please install ffmpeg");
         }
@@ -90,22 +103,18 @@ class socialFork
         $fileName = $this->fileName;
         $filePath = $this->filePath;
         $videoUrl = $this->videoURL;
-        $command = shell_exec("yt-dlp -o '$filePath/$fileName.%(ext)s' --format best -j $videoUrl");
-
+        if($this->isMerged){
+            $commandString = "yt-dlp --playlist-start 1 --playlist-end 1 -o '$filePath/$fileName.%(ext)s' -f bestvideo+bestaudio --merge-output-format mp4 -j $videoUrl";
+        }else{
+            $commandString = "yt-dlp --playlist-start 1 --playlist-end 1 -o '$filePath/$fileName.%(ext)s' -f b -j $videoUrl";
+        }
+        $commandString .= " 2>&1";
+        $command = shell_exec($commandString);
         if($command === null){
             throw new Exception("Error while getting information !");
         }else{
             $data = json_decode($command,true);
-            $fileUrl = parse_url($data['filename'],PHP_URL_PATH);
-            $elements = explode("/",$fileUrl);
-
-            $responseData['id'] = $data['id'];
-            $responseData['title'] = $data['title'];
-            $responseData['description'] = $data['description'];
-            $responseData['filename'] = end($elements);
-            $responseData['file_url'] = $data['filename'];
-            $responseData['thumbnail'] = $data['thumbnail'];
-            return $responseData;
+            return $data;
         }
     }
 
