@@ -3,8 +3,9 @@
 namespace Kri55h;
 
 use Exception;
+use function shell_exec;
 
-class socialFork
+class SocialFork
 {
     private $videoURL,$fileName,$filePath;
 
@@ -26,25 +27,25 @@ class socialFork
         return $basePath . DIRECTORY_SEPARATOR . $append;
     }
 
-    public function setUrl(string $url) : socialFork
+    public function setUrl(string $url) : SocialFork
     {
         $this->videoURL = $url;
         return $this;
     }
 
-    public function setName(string $name): socialFork
+    public function setName(string $name): SocialFork
     {
         $this->fileName = $name;
         return $this;
     }
 
-    public function setDownloadPath(string $path): socialFork
+    public function setDownloadPath(string $path): SocialFork
     {
         $this->filePath = $path;
         return $this;
     }
 
-    function combineAudioAndVideo(bool $action = true) : socialFork
+    function combineAudioAndVideo(bool $action = true) : SocialFork
     {
         $this->isMerged = $action;
         return $this;
